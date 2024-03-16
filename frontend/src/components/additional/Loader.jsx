@@ -3,7 +3,8 @@ import React from 'react';
 function Loader() {
   return (
     <lottie-player
-      src="https://lottie.host/b7ed822f-498f-4806-a758-ea93bef344a5/HnfD2AXvTs.json"
+    
+      src="https://lottie.host/c4e1969a-1b74-4003-9e33-0c94ba05e27d/qhinDmYp2s.json"
       background="transparent"
       speed="2"
       style={{
