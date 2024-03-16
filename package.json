@@ -1,0 +1,19 @@
+{
+  "name": "dummyproject",
+  "version": "1.0.0",
+  "description": "dummy-project",
+  "main": "index.js",
+  "scripts": {
+    "dummyproject": "npm-run-all -p start:newfront start:backend",
+    "start:newfront": "cd newfront && npm start",
+    "start:backend": "cd backend && python manage.py runserver"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.2",
+    "firebase": "^10.5.0",
+    "react-router-dom": "^6.17.0",
+    "uuid": "^9.0.1"
+  }
+}

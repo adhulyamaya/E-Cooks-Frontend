@@ -1,0 +1,83 @@
+.background-container {
+  position: relative;
+  height: 100vh;
+}
+
+.background-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(https://images.unsplash.com/photo-1622667042273-e0e54442440a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80); /* Update the image path */
+  background-size: cover;
+  background-position: top;
+  filter: blur(3px);
+  z-index: -1;
+}
+
+.login-container {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form {
+  background-color: rgba(192, 206, 192, 0.7);
+  margin: 20px;
+  padding: 40px;
+  border: 2px solid #1a1717;
+  border-radius: 12px;
+  width: 40%; /* Adjust the width as needed */
+  max-width: 400px; /* Set a maximum width to prevent the form from becoming too wide */
+  margin: auto; /* Center the form */
+  backdrop-filter: blur(7px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.google-login-wrapper {
+  margin-top: 20px; 
+  margin-left: 40px;
+  
+}
+
+.login-form input {
+  margin-bottom: 20px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: rgba(104, 121, 104, 0.165);
+  color: black;
+}
+
+.login-button {
+  background-color: rgb(17, 128, 13);
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* @media (max-width: 768px) {
+  .login-form {
+    width: 80%;
+  }
+} */
+
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px; 
+}
+
+
+

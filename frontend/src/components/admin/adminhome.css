@@ -1,0 +1,21 @@
+.backgrnd {
+  background-image: url("../../../public/images/restaurant-1284351_1280.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100vh;
+  /* padding-top: 20%;
+  padding-right: 10px; */
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* .backgrnd {
+  background-position: right;
+  padding-top: 50%;
+  height: 80vh;
+} */

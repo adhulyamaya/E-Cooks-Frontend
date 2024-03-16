@@ -1,0 +1,63 @@
+*::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+  font: 62.5%;
+}
+body {
+  font: 1.6rem;
+  margin: 0;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: darkgray;
+}
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 8vh;
+  background-color: rgb(0, 48, 126);
+}
+.nav_brand {
+  text-transform: uppercase;
+  font-weight: bold;
+  color: white;
+}
+.nav_item {
+  display: flex;
+  gap: 2rem;
+}
+.nav_toggler {
+  width: 3rem;
+  height: 0.2rem;
+  background-color: darkgray;
+  display: none;
+  cursor: pointer;
+}
+@media screen and (max-width: 768px) {
+  .nav_item {
+    display: none;
+  }
+  .nav_toggler {
+    display: block;
+  }
+  .nav_menu {
+    position: fixed;
+    top: 8vh;
+    right: 0;
+    width: 50%;
+    height: 92vh;
+    background-color: antiquewhite;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  .nav_active .nav_menu {
+    transform: translateX(0);
+  }
+}
