@@ -53,7 +53,9 @@ const AdminProfile = () => {
       <Box sx={{ flexGrow: 1, marginTop: '64px', marginLeft: '240px', padding: '20px' }}>
         <SideBar />
         <div className='container'>
-          <h1>USERS</h1>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <h1></h1>
+          </div>
           <div style={{ overflowX: 'auto' }}>
             <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: '600px' }}>
               <thead>
