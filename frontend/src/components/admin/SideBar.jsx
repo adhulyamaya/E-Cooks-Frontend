@@ -79,7 +79,7 @@ export default function SideBar() {
     {
       text: 'Entrolled Users',
       icon: <AiIcons.AiOutlineUser />,
-      link: '/admin-profile/entrolledstudentcourselise',
+      link: '/admin-home/entrolledstudentcourselist',
     },
     {
       text: 'Mentors',

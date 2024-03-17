@@ -10,13 +10,13 @@ const CourseManage = () => {
   useEffect(() => {
     axiosInstance.get('admin-class-list/')
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data,"yaya");
         setClassdata(res.data.classdata);
       })
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, []); 
 
   return (
     <>

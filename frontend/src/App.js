@@ -99,7 +99,7 @@ function App() {
             <Route path="/admin-profile"element={<AdminProfile />}/>
             <Route path="admin-home/mentors-manage" element={<Mentorsmanage />} />
             <Route path="admin-home/course-manage" element={<CourseManage />} />
-            <Route path="admin-home/entrolledstudentcourselise" element={<EntrolleStudentCourseList />} />
+            <Route path="admin-home/entrolledstudentcourselist" element={<EntrolleStudentCourseList />} />
             <Route path="/admin-profile" element={<AdminProfile />} />
             <Route path="/create" element={<Create />} />
             <Route path="/edit/:id" element={<EditUser />} />
