@@ -1,76 +1,59 @@
-// import React,{useEffect,useState} from "react";
-// import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
+// import React from "react";
 // import RouterOutlet from "../RouterOutlet/RouterOutlet";
+// import SideBar from "./SideBar";
+// import Navbar from "./Navbar";
+// import "./adminhome.css"
+// import Box from '@mui/material/Box';
 
+// const AdminHome = () => {
+//   return (
+//     <>
+//     <Navbar />
+//       <Box sx={30}/>
+//       <Box sx={{ display: 'flex' }}>     
+//         <SideBar /> 
+//         <Box sx={{ flexGrow:1,p:3 }}>    
+//         <div className="backgrnd" >
+//           </div> 
+//           </Box> 
+//         </Box>  
+//         <RouterOutlet />
+//     </>
+//   );
+// };
+// export default AdminHome;
 
-// function AdminHome(){
-//     const navigate=useNavigate()
-
-//     const logoutSubmit=()=>{
-//         localStorage.removeItem("adminDetails")
-//         localStorage.removeItem("accessToken")
-//         navigate('../adminlogin')
-//     }
- 
-//     return(
-//         <>
-//         <button onClick={logoutSubmit}>Logout </button>
-//         <br />
-//         <Link to="/admin-profile">ALL USERS</Link>
-//         <br />
-//         <Link to="/admin-home/mentors-manage">MENTORS</Link>
-//         <br />
-//         <Link to="/admin-home/course-manage">COURSES</Link>
-        
-//         <RouterOutlet/>
-//         </>
-        
-//     )
-// }
-// export default AdminHome
 
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import RouterOutlet from "../RouterOutlet/RouterOutlet";
 import SideBar from "./SideBar";
 import Navbar from "./Navbar";
-import "./adminhome.css"
+import "./adminhome.css";
 import Box from '@mui/material/Box';
-
+import { Routes, Route } from 'react-router-dom'; 
+import ProtectedRouteUsers from '../../ProtectedRoute/ProtectedRouteUsers'; 
 
 const AdminHome = () => {
-  const navigate = useNavigate();
-
-  const logoutSubmit = () => {
-    localStorage.removeItem("adminDetails");
-    localStorage.removeItem("accessToken");
-    navigate("../adminlogin");
-  };
-
   return (
     <>
-    <Navbar />
-
+      <Navbar />
       <Box sx={30}/>
-
       <Box sx={{ display: 'flex' }}>     
         <SideBar /> 
         <Box sx={{ flexGrow:1,p:3 }}>    
-        <div className="backgrnd" >
-          </div> 
-          </Box> 
-        </Box>  
-     
-        
-          <button onClick={logoutSubmit}>logoutyyyyyyyyyyyyyyyyyyyyyy</button>
-          <br />        
-         
-      
-        
-        <RouterOutlet />
-    
-     
+          <div className="backgrnd" />
+        </Box> 
+      </Box>
+      <Routes>
+        <Route
+          path="/admin-home"
+          element={
+            <ProtectedRouteUsers
+              element={<RouterOutlet />}
+            />
+          }
+        />
+      </Routes>
     </>
   );
 };

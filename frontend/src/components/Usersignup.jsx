@@ -272,7 +272,7 @@ const Usersignup = () => {
             placeholder="Email"
             onChange={(e) => {
               dispatch(changeEmail(e.target.value));
-              setErrors({ ...errors, email: '' }); // Clear previous email error
+              setErrors({ ...errors, email: '' }); 
             }}
           />
           {errors.email && <p className="error-message">{errors.email}</p>}
@@ -282,7 +282,7 @@ const Usersignup = () => {
             placeholder="Phone"
             onChange={(e) => {
               dispatch(changePhone(e.target.value));
-              setErrors({ ...errors, phone: '' }); // Clear previous phone error
+              setErrors({ ...errors, phone: '' }); 
             }}
           />
           {errors.phone && <p className="error-message">{errors.phone}</p>}

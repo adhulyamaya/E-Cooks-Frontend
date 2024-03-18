@@ -13,4 +13,6 @@ const ProtectedRoute = ({ path, element: Element, ...rest }) => {
   }
 };
 
+
 export default ProtectedRoute;
+

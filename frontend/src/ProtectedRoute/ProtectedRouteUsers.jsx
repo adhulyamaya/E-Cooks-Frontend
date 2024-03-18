@@ -1,33 +1,14 @@
-// import React from 'react'
-// import { Route, Navigate } from 'react-router-dom';
-
-// const ProtectedRouteUsers = ({ element, userType }) => {
- 
-//   if (userType === 'admin') {
-//     return <Route element={element} />;
-//   } else if (userType === 'mentor') {
-//     return <Navigate to="/mentor-home" />;
-//   } else if (userType === 'user') {
-//     return <Navigate to="/user-home" />;
-//   } else {
-//     return <Navigate to="/login" />;
-//   }
-// };
-
-// export default ProtectedRouteUsers
-
-
-
 import React from 'react'
 import { Route, Navigate } from 'react-router-dom';
+import { isAuthenticated } from '../components/authUtils';
 import Cookies from 'js-cookie';
 
 const ProtectedRouteUsers  = ({ element }) => {
   const adminDetails = Cookies.get('adminDetails');
   const accessToken = Cookies.get('accessToken');
 
-  if (!adminDetails || !accessToken) {
-    return <Navigate to="/adminlogin" />;
+  if (!isAuthenticated()) {
+    return <Navigate to="/adminlogin" replace />; 
   }
 
   return <Route element={element} />;

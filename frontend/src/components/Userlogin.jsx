@@ -41,7 +41,6 @@ const Userlogin = () => {
         localStorage.removeItem('adminDetails'); 
         Cookies.set("userDetails", JSON.stringify(res.data.userdata));
         Cookies.set("accessToken", JSON.stringify(res.data.access));
-        // localStorage.removeItem('adminDetails'); 
         if (res.data.message === "success")
           navigate('../');
       })

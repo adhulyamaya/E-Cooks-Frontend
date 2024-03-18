@@ -15,5 +15,5 @@ export const isAuthenticated = () => {
     
     return false;
   };
-  
+  // checks if a user is authenticated based on the presence of an access token either in localStorage or in cookies. 
   
