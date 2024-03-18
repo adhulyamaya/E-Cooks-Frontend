@@ -115,7 +115,7 @@ export default function SideBar() {
         </List>
         <Divider />
         <List>
-          <ListItem button component={Link} to="/" sx={{ textDecoration: 'none' }}>
+          <ListItem button component={Link} to="/admin-home" sx={{ textDecoration: 'none' }}>
             <ListItemIcon><AiIcons.AiOutlineHome /></ListItemIcon>
             <ListItemText primary="Home" />
           </ListItem>

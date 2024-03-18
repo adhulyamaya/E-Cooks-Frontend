@@ -1,29 +1,3 @@
-// import React from "react";
-// import RouterOutlet from "../RouterOutlet/RouterOutlet";
-// import SideBar from "./SideBar";
-// import Navbar from "./Navbar";
-// import "./adminhome.css"
-// import Box from '@mui/material/Box';
-
-// const AdminHome = () => {
-//   return (
-//     <>
-//     <Navbar />
-//       <Box sx={30}/>
-//       <Box sx={{ display: 'flex' }}>     
-//         <SideBar /> 
-//         <Box sx={{ flexGrow:1,p:3 }}>    
-//         <div className="backgrnd" >
-//           </div> 
-//           </Box> 
-//         </Box>  
-//         <RouterOutlet />
-//     </>
-//   );
-// };
-// export default AdminHome;
-
-
 import React from "react";
 import RouterOutlet from "../RouterOutlet/RouterOutlet";
 import SideBar from "./SideBar";

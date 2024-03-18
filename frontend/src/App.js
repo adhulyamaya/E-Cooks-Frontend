@@ -95,9 +95,7 @@ function App() {
             {/* admin routes */}            
             <Route path="/adminlogin" element={<Adminlogin />} />
             {/* <Route path="/admin-home" element={<AdminHome />} /> */}
-            <Route
-              path="/admin-home"
-              element={<ProtectedRouteUsers element={<AdminHome />} userType="admin" />}
+            <Route path="/admin-home" element={<ProtectedRouteUsers path="/admin-home" element={AdminHome} userType="admin" />}
             />
             {/* <ProtectedRouteUsers path="/admin-home" userType="admin" element={<AdminHome />} /> */}
             <Route path="/admin-profile"element={<AdminProfile />}/>
