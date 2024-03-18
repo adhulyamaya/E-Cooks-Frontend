@@ -2,12 +2,17 @@ import React, { useState } from "react";
 // import "./adminlogin.css";
 import axiosInstance from "../../axios/adminaxios";
 import { useNavigate } from "react-router-dom";
-import ProtectedRouteUsers from '../../ProtectedRoute/ProtectedRouteUsers'
 import Cookies from 'js-cookie';
+import { isAuthenticated } from '../authUtils';
 const Adminlogin = () => {
     const [adminUsername, setUsername] = useState("");
     const [adminPassword, setPassword] = useState("");
     const [error,setError]=useState(null);
+    React.useEffect(() => {
+      if (isAuthenticated()) {
+        navigate('/admin-home'); 
+      }
+    }, []);
     const navigate=useNavigate();
     const handleSignup = (e) => {
         e.preventDefault(); 

@@ -4,12 +4,20 @@ import axiosInstance from "../../axios/mentoraxios";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import "./mentorlogin.css"
+import { isAuthenticated } from '../authUtils';
+
 
 const Userlogin = () => {
   const [name, setname] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
+  React.useEffect(() => {
+    if (isAuthenticated()) {
+      navigate('/mentordashboard'); 
+    }
+  }, []);
+  
   const loginSubmit = () => {
     const data = {
       name: name,
@@ -31,10 +39,8 @@ const Userlogin = () => {
 
     });
   };
-
   return (
-    <>
-    
+    <>    
     <div className="login-container">
     <div className="wrapper">
       <h2>MENTOR LOGIN </h2><br />
@@ -67,5 +73,4 @@ const Userlogin = () => {
     </>
   );
 };
-
 export default Userlogin;

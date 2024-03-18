@@ -9,7 +9,6 @@ import { jwtDecode } from 'jwt-decode';
 import './Userlogin.css';
 import Cookies from 'js-cookie';
 import { isAuthenticated } from './authUtils';
-import ProtectedRouteUsers from '../ProtectedRoute/ProtectedRouteUsers'; 
 
 
 const Userlogin = () => {
