@@ -65,12 +65,7 @@ const Checkout = () => {
       console.log('Order ID from backend:', orderIdFromBackend);
       // setOrderIdFromBackend(orderIdFromBackend);
       console.log('Order successful. Your order id is--', orderIdFromBackend, CLIENT_ID);
-    navigate('/ordersuccess', { state: { orderId: orderIdFromBackend } });
-
-
-
-
-      
+    navigate('/ordersuccess', { state: { orderId: orderIdFromBackend } });      
     })
     .catch((error) => {
       console.error('Error storing order details on the backend:', error);
@@ -88,9 +83,8 @@ const Checkout = () => {
       // navigate('/ordersuccess', { state: { orderId: orderIdFromBackend } });
     }
   }, [success, orderIdFromBackend, CLIENT_ID, navigate]);
-  
-  return (  
     
+  return (      
     <>
   <UserNav />
   <Back />
@@ -99,7 +93,7 @@ const Checkout = () => {
         {courseId ? (
           <div className="wrapper">
             <div className="product-img">
-            <h1></h1>
+           
               <img
                 src={courseInfo.thumbnail}
                 alt=""

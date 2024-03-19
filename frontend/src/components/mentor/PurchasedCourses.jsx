@@ -91,10 +91,13 @@ const PurchasedCourses = () => {
       }
     };
   }, []);
+  const datas = {
+    // username: login.value.username,
+    mentorId:mentorsignup.value.mentorId
+  };
 
   useEffect(() => {
-    axiosInstance.get(`entrolledstudents/?mentor_id=${mentorId}`)
-    // axiosInstance.get("entrolledstudents/")
+    axiosInstance.post("entrolledstudents/",datas)
       .then((res) => {
         console.log(res.data, "displaying datas in mentor side");
         setUserdata(res.data.userdata);
@@ -121,6 +124,7 @@ const PurchasedCourses = () => {
                   <tr>
                     <th style={{ paddingRight: '30px' }}>ORD ID</th>
                     <th style={{ paddingRight: '30px' }}>student name</th>
+                    <th style={{ paddingRight: '20px' }}>mentor</th>
                     <th style={{ paddingRight: '30px' }}>classname</th>
                     <th style={{ paddingRight: '20px' }}>paid amount</th>
                     <th style={{ paddingRight: '20px' }}>booked date</th>
@@ -134,6 +138,7 @@ const PurchasedCourses = () => {
                     <tr key={item.id}>
                       <td>{item.id}</td>
                       <td>{item.student_username}</td>
+                      <td>{item.mentor}</td>
                       <td>{item.class_name}</td>
                       <td>{item.payment_amount}</td>
                       <td>{item.booking_date}</td>
