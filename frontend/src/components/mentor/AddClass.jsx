@@ -4,16 +4,22 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../../axios/mentoraxios';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { v4 as uuidv4 } from "uuid";
-
 import { setClassname, setDescription, setPrice, setSyllabus } from '../../feautures/mentorSlice/addClassSlice';
 import { storage } from '../../firebase/firebaseconfig';
+
+
 
 const AddClass = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [image, setImage] = useState(null); 
   const createclass = useSelector((state) => state.createclass);
-  const mentorId = useSelector((state) => state.mentorsignup.value.mentorId);
+  // const mentorId = useSelector((state) => state.mentorsignup.value.mentorId);
+
+  const mentorsignup = useSelector((state) => state.mentorsignup);
+  console.log(mentorsignup)
+  const mentorId=mentorsignup.value.mentorId
+  console.log(mentorsignup.value.mentorId,"got mentor id from redux")
 
   const handleThumbnail = (e) => {
     setImage(e.target.files[0]);

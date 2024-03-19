@@ -7,6 +7,7 @@ import ChatIcon from '@mui/icons-material/Chat';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {setStudentId } from "../../feautures/signupSlice"
+import { useSelector } from 'react-redux';
 
 const PurchasedCourses = () => {
   const [userdata, setUserdata] = useState([]);
@@ -14,6 +15,10 @@ const PurchasedCourses = () => {
   const [isConnected, setIsConnected] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const mentorsignup = useSelector((state) => state.mentorsignup);
+  console.log(mentorsignup)
+  const mentorId=mentorsignup.value.mentorId
+  console.log(mentorsignup.value.mentorId,"got mentor id from redux")
 
   const confirmationHandle = (id) => {
     axiosInstance.post(`confirm-booking/${id}/`)
@@ -88,7 +93,8 @@ const PurchasedCourses = () => {
   }, []);
 
   useEffect(() => {
-    axiosInstance.get("entrolledstudents/")
+    axiosInstance.get(`entrolledstudents/?mentor_id=${mentorId}`)
+    // axiosInstance.get("entrolledstudents/")
       .then((res) => {
         console.log(res.data, "displaying datas in mentor side");
         setUserdata(res.data.userdata);
@@ -99,7 +105,7 @@ const PurchasedCourses = () => {
   }, []);
 
   if (!isConnected) {
-    return <div>Loading...</div>; // Render a loading indicator until WebSocket is connected
+    return <div>Loading...</div>; 
   }
 
   return (

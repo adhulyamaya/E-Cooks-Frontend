@@ -57,6 +57,7 @@ const Checkout = () => {
       // clientID: CLIENT_ID,
       userDetails: userDetails,
       courseDetails: courseInfo,
+
     })
     .then((response) => {
       console.log('Order details stored on the backend:', response.data);
@@ -65,6 +66,9 @@ const Checkout = () => {
       // setOrderIdFromBackend(orderIdFromBackend);
       console.log('Order successful. Your order id is--', orderIdFromBackend, CLIENT_ID);
     navigate('/ordersuccess', { state: { orderId: orderIdFromBackend } });
+
+
+
 
       
     })

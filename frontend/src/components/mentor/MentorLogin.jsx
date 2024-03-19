@@ -1,23 +1,26 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
 import axiosInstance from "../../axios/mentoraxios";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import "./mentorlogin.css"
 import { isAuthenticated } from '../authUtils';
+import { setMentorId } from '../../feautures/mentorSlice/mentorSignupSlice';
 
 
 const Userlogin = () => {
   const [name, setname] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     if (isAuthenticated()) {
       navigate('/mentordashboard'); 
     }
   }, []);
-  
+
   const loginSubmit = () => {
     const data = {
       name: name,
@@ -25,15 +28,17 @@ const Userlogin = () => {
     };
 
     axiosInstance.post("mentorlogin/", data).then((res) => {
-      console.log(res.data);
+      console.log(res.data,"hiiiiiiii");
+      const mentorid =res.data.mentordata.id
+      console.log(mentorid)
+      dispatch(setMentorId(mentorid))
+      
       const tokens = {
         access: res.data.access,
         refresh: res.data.refresh,
       };
       Cookies.set("mentorDetails", JSON.stringify(res.data.mentordata));
       Cookies.set("accessToken", JSON.stringify(res.data.access));
-      // localStorage.setItem("userDetails", JSON.stringify(res.data.userdata));
-      // localStorage.setItem("accessToken", JSON.stringify(res.data.access));
       if (res.data.message === "success") 
         navigate("/mentordashboard");
 
