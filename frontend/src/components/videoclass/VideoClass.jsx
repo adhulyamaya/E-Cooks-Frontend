@@ -21,5 +21,4 @@ const VideoClass = () => {
     </div>
   )
 }
-
 export default VideoClass

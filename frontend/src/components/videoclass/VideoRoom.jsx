@@ -3,9 +3,9 @@ import AgoraRTC from 'agora-rtc-sdk-ng';
 import VideoPlayer from './VideoPlayer';
 
 
-const APP_ID = '810c2eb37ccd4b8bae2f99238a804466';
+const APP_ID = 'fc71db98ec57480d80748206e4cad80d';
 const TOKEN =
-  '007eJxTYJD63T03RWyRjI57W03VodI/6Zvvdm9yiWooff05/JulX7wCg4WhQbJRapKxeXJyikmSRVJiqlGapaWRsUWihYGJiZnZYvuvqQ2BjAwut14wMTJAIIjPxJCRycAAAFvCIDI=';
+  '007eJxTYMg8saC6a/Plww+iT6p0/igN2LTJRPOUl1zS8pijpgmXdtxUYEhLNjdMSbK0SE02NTexMEixMABSRgZmqSbJiUBOikP1r9SGQEaGHzcCGBkZIBDEZ2LIyGRgAADNXyFl';
 const CHANNEL = 'hi';
 
 const client = AgoraRTC.createClient({
