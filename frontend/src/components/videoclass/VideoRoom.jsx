@@ -18,6 +18,7 @@ export const VideoRoom = () => {
   const [localTracks, setLocalTracks] = useState([]);
   const [tracks, setTracks] = useState([]);
   const [joined, setJoined] = useState(false);
+  
 
   const handleUserJoined = async (user, mediaType) => {
     await client.subscribe(user, mediaType);
@@ -28,6 +29,7 @@ export const VideoRoom = () => {
 
     if (mediaType === 'audio') {
       // user.audioTrack.play()
+      console.log("User", user.uid, "hasaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa joined");
     }
   };
 
@@ -36,6 +38,16 @@ export const VideoRoom = () => {
       previousUsers.filter((u) => u.uid !== user.uid)
     );
   };
+
+  // const handleUserLeft = (user) => {
+  //   client.getRemoteUsers().then((remoteUsers) => {
+  //     const isUserStillPresent = remoteUsers.some((remoteUser) => remoteUser.uid === user.uid);
+  //     if (!isUserStillPresent) {
+  //       setUsers((previousUsers) => previousUsers.filter((u) => u.uid !== user.uid));
+  //     }
+  //   });
+  // };
+  
 
   useEffect(() => {
     client.on('user-published', handleUserJoined);

@@ -46,7 +46,7 @@ const MyCourses = () => {
 
   const handleVideoCallWithMentor = (mentorId) => {
     console.log('Video call with mentor ID:', mentorId);
-    navigate(`/videoclass`);
+    navigate(`/chatroom`);
   };
 
   return (
@@ -76,6 +76,7 @@ const MyCourses = () => {
               >
                 <ExpandMoreIcon />
               </IconButton>
+
               <IconButton
                 onClick={() => handleChatWithMentor(course.booked_class.mentor)}
                 aria-label="chat with mentor"

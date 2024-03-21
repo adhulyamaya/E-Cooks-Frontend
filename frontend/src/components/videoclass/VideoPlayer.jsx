@@ -12,10 +12,11 @@ import React,{useEffect,useRef} from 'react'
       Uid: {user.uid}
       <div
         ref={ref}
-        style={{ width: '500px', height: '500px' }}
+        style={{ width: '200px', height: '200px' }}
       ></div>
       
     </div>
+    
   )
 }
 

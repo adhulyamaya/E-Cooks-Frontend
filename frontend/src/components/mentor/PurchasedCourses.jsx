@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import {setStudentId } from "../../feautures/signupSlice"
 import { useSelector } from 'react-redux';
+import VideoCall from '@mui/icons-material/VideoCall';
 
 const PurchasedCourses = () => {
   const [userdata, setUserdata] = useState([]);
@@ -19,6 +20,9 @@ const PurchasedCourses = () => {
   console.log(mentorsignup)
   const mentorId=mentorsignup.value.mentorId
   console.log(mentorsignup.value.mentorId,"got mentor id from redux")
+
+  const signup = useSelector((state) => state.signup);
+  const studentId=signup.value.studentId
 
   const confirmationHandle = (id) => {
     axiosInstance.post(`confirm-booking/${id}/`)
@@ -53,7 +57,11 @@ const PurchasedCourses = () => {
     dispatch(setStudentId(student))
     navigate('/chatroommentor')
   };
-
+  const handleVideoCall = (studentId) => {
+    console.log("Initiate vvvvvvvvvvvvvvvvvvvvvvvvchat with student:", studentId);
+    dispatch(setStudentId(studentId))
+    navigate('/videoclass')
+  };
   useEffect(() => {
     const newSocket = new WebSocket('ws://localhost:8000/ws/notification/');
 
@@ -131,6 +139,7 @@ const PurchasedCourses = () => {
                     <th style={{ paddingRight: '20px' }}>booked time</th>
                     <th style={{ paddingRight: '20px' }}>availabilty</th>
                     <th style={{ paddingRight: '20px' }}></th>
+                    <th style={{ paddingRight: '20px' }}></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -156,7 +165,18 @@ const PurchasedCourses = () => {
                         <IconButton onClick={() => initiateChat(item.student)} aria-label="chat">
                           <ChatIcon />
                         </IconButton>
+                        
                       </td>
+
+                      <td>
+                      <td>
+                        <IconButton onClick={() => handleVideoCall(item.student)} aria-label="video-call">
+                          <VideoCall />
+                        </IconButton>
+                      </td>
+                        
+                      </td>
+                      
                     </tr>
                   ))}
                 </tbody>

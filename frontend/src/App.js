@@ -20,8 +20,8 @@ import CourseManage from "./components/admin/CourseManage";
 import Chekout from "./components/checkout/Chekout";
 import Ordersucess from "./components/order/Ordersucess";
 import VideoPlayer from "./components/videoclass/VideoPlayer";
+//  import  VideoRoom  from "./components/videoclass/VideoRoom";
 import { VideoRoom } from "./components/videoclass/VideoRoom";
-
 import Adminlogin from "./components/admin/Adminlogin";
 import ProtectedRoute from "./ProtectedRoute/ProtectedRoute";
 import SideBar from "./components/admin/SideBar";
