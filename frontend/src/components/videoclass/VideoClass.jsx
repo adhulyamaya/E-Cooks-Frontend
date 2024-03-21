@@ -23,15 +23,10 @@
 
 // export default VideoClass
 
-
-
-
 import React, { useEffect, useRef, useState } from 'react';
 import AgoraRTC from 'agora-rtc-sdk';
-import axiosInstance from '../../axios/mentoraxios';
+import axiosInstance from '../../axios/videocallaxios';
 import { useSelector } from 'react-redux';
-
-
 
 const VideoClass = () => {
   const [localStream, setLocalStream] = useState(null);
@@ -46,8 +41,10 @@ const VideoClass = () => {
   const signup = useSelector((state) => state.signup);
   const studentId=signup.value.studentId
 
-  const appId = 'fc71db98ec57480d80748206e4cad80d'; // Your Agora App ID
-  const channel = 'hi'; // Channel name for the video call
+  const appId = 'fc71db98ec57480d80748206e4cad80d'; 
+  const appCertificate = '84ef02d7ccba487598ce7314ab654950';
+  // const TOKEN = '007eJxTYPhgZRrj0J6Wce9lb2PZ427Zd/vjXt+7darvW9F+1ofeXfwKDGnJ5oYpSZYWqcmm5iYWBikWBkDKyMAs1SQ5EchJefznd2pDICNDxr8LLIwMEAjiMzFkZDIwAAAJZSMe';
+  const channel = 'hi';
 
   const rtc = useRef(null);
   const localStreamRef = useRef(null);
@@ -72,7 +69,8 @@ const VideoClass = () => {
     rtc.current.join(
       appId,
       channel,
-      null,
+      appCertificate,
+      // null,
       (uid) => {
         setUid(uid);
         createLocalStream(uid);
@@ -131,13 +129,26 @@ const VideoClass = () => {
     rtc.current.on('user-published', handleUserPublished);
     rtc.current.on('user-unpublished', handleUserUnpublished);
     rtc.current.on('user-left', handleUserLeft);
-
+  
     return () => {
-      rtc.current.off('user-published', handleUserPublished);
-      rtc.current.off('user-unpublished', handleUserUnpublished);
-      rtc.current.off('user-left', handleUserLeft);
+      if (rtc.current) {
+        rtc.current.off('user-published', handleUserPublished);
+        rtc.current.off('user-unpublished', handleUserUnpublished);
+        rtc.current.off('user-left', handleUserLeft);
+      }
+  
+      if (localStreamRef.current) {
+        localStreamRef.current.close();
+        localStreamRef.current = null;
+      }
+  
+      if (remoteStreamRef.current) {
+        remoteStreamRef.current.close();
+        remoteStreamRef.current = null;
+      }
     };
   }, []);
+  
 
   const handleUserPublished = async (user, mediaType) => {
     await rtc.current.subscribe(user, mediaType);
@@ -167,7 +178,7 @@ const VideoClass = () => {
   };
 
   const handleStartVideoCall = async () => {
-    // Start video call logic here
+    
     try {
       // Send a request to your backend to notify the mentor about the video call
       const response = await axiosInstance.post(`start-video-call/${mentorId}/${studentId}/`);
@@ -179,7 +190,7 @@ const VideoClass = () => {
 
   return (
     <div>
-      {/* <h2>Video Call with {student.student_username}</h2> */}
+      {/* <h2>Video Call with {}</h2> */}
       <div>
         <video
           ref={(node) => {
