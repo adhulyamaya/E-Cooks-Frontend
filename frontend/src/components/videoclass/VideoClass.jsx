@@ -41,9 +41,10 @@ const VideoClass = () => {
   const signup = useSelector((state) => state.signup);
   const studentId=signup.value.studentId
 
-  const appId = 'fc71db98ec57480d80748206e4cad80d'; 
-  const appCertificate = '84ef02d7ccba487598ce7314ab654950';
-  // const TOKEN = '007eJxTYPhgZRrj0J6Wce9lb2PZ427Zd/vjXt+7darvW9F+1ofeXfwKDGnJ5oYpSZYWqcmm5iYWBikWBkDKyMAs1SQ5EchJefznd2pDICNDxr8LLIwMEAjiMzFkZDIwAAAJZSMe';
+  const appId = 'b69175e220d1424bac346732686c531c'; 
+  
+  const appCertificate = '8e4a8b23049e4109b1bb2a7213d8936f';
+  const TOKEN = '007eJxTYPhgZRrj0J6Wce9lb2PZ427Zd/vjXt+7darvW9F+1ofeXfwKDGnJ5oYpSZYWqcmm5iYWBikWBkDKyMAs1SQ5EchJefznd2pDICNDxr8LLIwMEAjiMzFkZDIwAAAJZSMe';
   const channel = 'hi';
 
   const rtc = useRef(null);
@@ -83,6 +84,7 @@ const VideoClass = () => {
   };
 
   const createLocalStream = (uid) => {
+    console.log('Creating local stream with UID:', uid);
     const localStream = AgoraRTC.createStream({
       streamID: uid,
       audio: true,
@@ -91,10 +93,15 @@ const VideoClass = () => {
     });
     localStream.init(
       () => {
+        console.log('Local stream initialized successfully');
         setLocalStream(localStream);
         localStreamRef.current = localStream;
         rtc.current.publish(localStream, (error) => {
-          console.error('Failed to publish local stream:', error);
+          if (error) {
+            console.error('Failed to publish local stream:', error);
+          } else {
+            console.log('Local stream published successfully');
+          }
         });
         setPublished(true);
       },
@@ -125,31 +132,29 @@ const VideoClass = () => {
     }
   };
 
-  useEffect(() => {
-    rtc.current.on('user-published', handleUserPublished);
-    rtc.current.on('user-unpublished', handleUserUnpublished);
-    rtc.current.on('user-left', handleUserLeft);
+  // useEffect(() => {
+  //   rtc.current.on('user-published', handleUserPublished);
+  //   rtc.current.on('user-unpublished', handleUserUnpublished);
+  //   rtc.current.on('user-left', handleUserLeft);
   
-    return () => {
-      if (rtc.current) {
-        rtc.current.off('user-published', handleUserPublished);
-        rtc.current.off('user-unpublished', handleUserUnpublished);
-        rtc.current.off('user-left', handleUserLeft);
-      }
+  //   return () => {
+  //     if (rtc.current) {
+  //       rtc.current.off('user-published', handleUserPublished);
+  //       rtc.current.off('user-unpublished', handleUserUnpublished);
+  //       rtc.current.off('user-left', handleUserLeft);
+  //     }
   
-      if (localStreamRef.current) {
-        localStreamRef.current.close();
-        localStreamRef.current = null;
-      }
+  //     if (localStreamRef.current) {
+  //       localStreamRef.current.close();
+  //       localStreamRef.current = null;
+  //     }
   
-      if (remoteStreamRef.current) {
-        remoteStreamRef.current.close();
-        remoteStreamRef.current = null;
-      }
-    };
-  }, []);
-  
-
+  //     if (remoteStreamRef.current) {
+  //       remoteStreamRef.current.close();
+  //       remoteStreamRef.current = null;
+  //     }
+  //   };
+  // }, []);
   const handleUserPublished = async (user, mediaType) => {
     await rtc.current.subscribe(user, mediaType);
     if (mediaType === 'video') {
@@ -178,16 +183,38 @@ const VideoClass = () => {
   };
 
   const handleStartVideoCall = async () => {
-    
+    if (joinChannel)  
     try {
       // Send a request to your backend to notify the mentor about the video call
       const response = await axiosInstance.post(`start-video-call/${mentorId}/${studentId}/`);
       console.log('Video call initiated:', response.data);
+      if (response.data && response.data.success) {
+        // Access the channel_name from response_data
+        const { response_data } = response.data;
+        const { channel_name } = response_data;
+  
+        // Join the Agora channel using the received channel_name
+        rtc.current.join(
+          appId,
+          channel_name,
+          appCertificate,
+          (uid) => {
+            setUid(uid);
+            createLocalStream(uid);
+            setJoined(true);
+          },
+          (error) => {
+            console.error('Failed to join channel:', error);
+          }
+        );
+  
+      } else {
+        console.error('Error starting video call:', response.data.message);
+      }
     } catch (error) {
       console.error('Error starting video call:', error);
     }
   }; 
-
   return (
     <div>
       {/* <h2>Video Call with {}</h2> */}
@@ -225,3 +252,6 @@ const VideoClass = () => {
 };
 
 export default VideoClass;
+
+
+
