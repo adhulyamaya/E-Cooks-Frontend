@@ -34,7 +34,7 @@ import UserNav from "./components/UserNav";
 // import Chat from "./chat/ChatRoom";
 import ChatRoomMentor from "./chat/ChatRoomMentor";
 import Chat from "./chat/ChatRoom";
-import VideoClass from "./components/videoclass/VideoClass";
+// import VideoClass from "./components/videoclass/VideoClass";
 import EntrolleStudentCourseList from "./components/admin/EntrolleStudentCourseList";
 
 
@@ -53,6 +53,8 @@ const Create = lazy(() => import("./components/admin/Create"));
 const EditUser = lazy(() => import("./components/admin/EditUser"));
 const DeleteUser = lazy(() => import("./components/admin/DeleteUser"));
 const CourseHome= lazy (() => import("./components/allcourses/CourseHome") );
+const VideoClass= lazy (() => import("./components/videoclass/VideoClass") );
+
 
 
 const LoaderWrapper = ({ children }) => {
