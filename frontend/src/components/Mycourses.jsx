@@ -46,7 +46,8 @@ const MyCourses = () => {
 
   const handleVideoCallWithMentor = (mentorId) => {
     console.log('Video call with mentor ID:', mentorId);
-    navigate(`/chatroom`);
+    navigate(`/video-room/${mentorId}`);
+    // navigate(`/videoclass`);
   };
 
   return (

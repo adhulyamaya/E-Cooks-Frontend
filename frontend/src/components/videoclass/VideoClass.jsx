@@ -58,6 +58,8 @@ const VideoClass = () => {
             Join Room
           </button>
         )}
+
+        {/* Here you can display the VideoRoom component when joined */}
         {joined && <VideoRoom />}
       </div>
     </div>

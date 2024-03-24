@@ -16,13 +16,9 @@ const Chat = () => {
     const ws = useRef(null);
     const mentorsignup = useSelector((state) => state.mentorsignup);
     const mentorId = mentorsignup.mentorId
-
-    
-    console.log(mentorId,"hi")
     console.log(mentorsignup,mentorsignup.value.mentorId,'hlp')
    
     useEffect(() => {
-        // Establish WebSocket connection when component mounts
         ws.current  = new WebSocket('ws://localhost:8000/ws/chat/');
         
         ws.current.onopen = () => {
@@ -31,23 +27,20 @@ const Chat = () => {
 
         ws.current.onmessage = (event) => {
             const messageData = JSON.parse(event.data);
-            // Update chat messages with incoming message
             setChatMessages([...chatMessages, messageData]);
-            // Scroll to bottom when new message received
             scrollBottomRef.current.scrollIntoView({ behavior: 'smooth' });
         };
 
         return () => {
-            // Clean up WebSocket connection when component unmounts
             if (ws.current) {
                 ws.current.close();
             }
         };
     }, []) // Empty dependency array ensures this runs only once
 
-    const handleUserChange = (event) => {
-        setUser(event.target.value);
-    };
+    // const handleUserChange = (event) => {
+    //     setUser(event.target.value);
+    // };
 
     const handleMessageChange = (event) => {
         setMessage(event.target.value);
@@ -60,16 +53,14 @@ const Chat = () => {
         }
     };
     const sendMessage = () => {
-        if (user && message) {
+        if ( message) {
             const messageData = {
-                user: user,
                 message: message,
                 sender_type: 'user', 
                 sender_id:31,
                 receiver_type:'mentor',
                 receiver_id:mentorsignup.value.mentorId,
             };
-            // Send message to WebSocket server
             console.log('Sending message userside:', messageData);
             if (ws.current.readyState === WebSocket.OPEN) {
                 ws.current.send(JSON.stringify(messageData));
@@ -82,7 +73,7 @@ const Chat = () => {
 
     const listChatMessages = chatMessages.map((chatMessageDto, index) => (
         <ListItem key={index}>
-            <ListItemText primary={`${chatMessageDto.user}: ${chatMessageDto.message}`} />
+            <ListItemText primary={` ${chatMessageDto.message}`} />
         </ListItem>
     ));
 
@@ -102,20 +93,20 @@ const Chat = () => {
                         </List>
                         <Grid container spacing={2} alignItems="center" style={{ marginTop: '20px' }}>
                             <Grid item xs={4}>
-                                <FormControl fullWidth>
+                                {/* <FormControl fullWidth>
                                     <TextField
                                         onChange={handleUserChange}
                                         value={user}
                                         label="name"
                                         variant="outlined"
                                     />
-                                </FormControl>
+                                </FormControl> */}
                             </Grid>
                             <Grid item xs={6}>
                                 <FormControl fullWidth>
                                     <TextField
                                         onChange={handleMessageChange}
-                                        onKeyDown={handleEnterKey}
+                                        // onKeyDown={handleEnterKey}
                                         value={message}
                                         label="Type your message..."
                                         variant="outlined"
