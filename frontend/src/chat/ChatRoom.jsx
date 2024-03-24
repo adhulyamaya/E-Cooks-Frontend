@@ -80,6 +80,8 @@ const Chat = () => {
     return (
         <Fragment>
             <UserNav />
+            <br />
+            <br />
             <Container>
                 <Paper elevation={5} style={{ maxHeight: '70vh', overflowY: 'auto' }}>
                     <Box p={3}>
@@ -122,6 +124,9 @@ const Chat = () => {
                     </Box>
                 </Paper>
             </Container>
+            <br />
+            <br />
+            <UserFooter />
         </Fragment>
     );
 };

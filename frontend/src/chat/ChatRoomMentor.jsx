@@ -3,6 +3,8 @@ import { Box } from "@mui/system";
 import { Fragment, useEffect, useRef, useState } from "react";
 import SendIcon from '@mui/icons-material/Send';
 import { useSelector } from 'react-redux';
+import MentorHeaders from "../components/mentor/MentorHeader";
+import MentorSidebar from "../components/mentor/MentorSidebar";
 
 const ChatRoomMentor = () => {
   const ENTER_KEY_CODE = 13;
@@ -54,16 +56,15 @@ const ChatRoomMentor = () => {
   };
 
   const sendMessage = () => {
-    if (user && message) {
+    if ( message) {
       const messageData = {
-        user: user,
         message: message,
         sender_type: 'mentor', 
         sender_id:71,
         receiver_type:'user',
         receiver_id:signup.value.studentId,
       };
-      console.log('Sending message from mentorside:', messageData);
+      console.log('Sending message from mentoorside:', messageData);
       if (mentorsocket.current.readyState === WebSocket.OPEN) {
         mentorsocket.current.send(JSON.stringify(messageData));
         setMessage('');
@@ -75,12 +76,16 @@ const ChatRoomMentor = () => {
 
   const listChatMessages = chatMessages.map((chatMessage, index) => (
     <ListItem key={index}>
-      <ListItemText primary={`${chatMessage.user}: ${chatMessage.message}`} />
+      <ListItemText primary={` ${chatMessage.message}`} />
     </ListItem>
   ));
 
   return (
     <Fragment>
+      <MentorHeaders />
+      <br />
+      <br />
+      <br />
       <Container>
         <Paper elevation={5} style={{ maxHeight: '70vh', overflowY: 'auto' }}>
           <Box p={3}>
@@ -93,11 +98,11 @@ const ChatRoomMentor = () => {
               <ListItem ref={scrollBottomRef}></ListItem>
             </List>
             <Grid container spacing={2} alignItems="center" style={{ marginTop: '20px' }}>
-              <Grid item xs={4}>
+              {/* <Grid item xs={4}>
                 <FormControl fullWidth>
-                  <TextField onChange={handleUserChange} value={user} label="Nickname" variant="outlined" />
+                  <TextField onChange={handleUserChange} value={studentId} label="Nickname" variant="outlined" />
                 </FormControl>
-              </Grid>
+              </Grid> */}
               <Grid item xs={6}>
                 <FormControl fullWidth>
                   <TextField onChange={handleMessageChange} onKeyDown={handleEnterKey} value={message} label="Type your message..." variant="outlined" />
