@@ -19,8 +19,6 @@ import React,{useEffect,useRef} from 'react'
     
   )
 }
-
-
 export default VideoPlayer
 // import React, { useEffect, useRef } from 'react';
 
