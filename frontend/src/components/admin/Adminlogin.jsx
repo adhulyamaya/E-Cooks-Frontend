@@ -1,54 +1,56 @@
 import React, { useState } from "react";
-// import "./adminlogin.css";
 import axiosInstance from "../../axios/adminaxios";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie';
 import { isAuthenticated } from '../authUtils';
+import "./adminlogin.css"
+
+
 const Adminlogin = () => {
     const [adminUsername, setUsername] = useState("");
     const [adminPassword, setPassword] = useState("");
-    const [error,setError]=useState(null);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
+
     React.useEffect(() => {
-      if (isAuthenticated()) {
-        navigate('/admin-home'); 
-      }
+        if (isAuthenticated()) {
+            navigate('/admin-home');
+        }
     }, []);
-    const navigate=useNavigate();
+
     const handleSignup = (e) => {
-        e.preventDefault(); 
-        console.log("Signup details:", { adminUsername,  adminPassword });
+        e.preventDefault();
+        console.log("Signup details:", { adminUsername, adminPassword });
         const datas = {
-          username: adminUsername,
-          password: adminPassword,
+            username: adminUsername,
+            password: adminPassword,
         };
-    
+
         axiosInstance.post('adminlogin/', datas)
-          .then((res) => {
-            const tokens = {
-              access: res.data.access,
-              refresh: res.data.refresh,
-            };
-            Cookies.set("adminDetails", JSON.stringify(res.data.userdataa));
-            Cookies.set("accessToken", JSON.stringify(res.data.access));
-            if (res.data.message === 'success') {
-              navigate('/admin-home');
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-            setError('Invalid credentials. Please check your username and password.');
-          });
-      };   
+            .then((res) => {
+                const tokens = {
+                    access: res.data.access,
+                    refresh: res.data.refresh,
+                };
+                Cookies.set("adminDetails", JSON.stringify(res.data.userdataa));
+                Cookies.set("accessToken", JSON.stringify(res.data.access));
+                if (res.data.message === 'success') {
+                    navigate('/admin-home');
+                }
+            })
+            .catch((error) => {
+                console.error(error);
+                setError('Invalid credentials. Please check your username and password.');
+            });
+    };
+
     return (
         <>
-            <div className="bgImg">
-            <div className="container">
-                <form onSubmit={handleSignup}>
-                    <h1>Sign Up</h1>
-                    <div className="ui divider"></div>
-                    <div className="ui form">
-                        <div className="field">
-                            <label>Username</label>
+            <div className="admincontainer">
+                <div className="wrapper">
+                    <form onSubmit={handleSignup}>
+                        <h2>ADMIN LOGIN</h2><br />
+                        <div className="form-field">
                             <input
                                 type="text"
                                 name="username"
@@ -57,8 +59,8 @@ const Adminlogin = () => {
                                 onChange={(e) => setUsername(e.target.value)}
                             />
                         </div>
-                        <div className="field">
-                            <label>Password</label>
+                        <div className="form-field">
+                           
                             <input
                                 type="password"
                                 name="password"
@@ -67,16 +69,13 @@ const Adminlogin = () => {
                                 onChange={(e) => setPassword(e.target.value)}
                             />
                         </div>
+                        {error && <p className="error">{error}</p>}
                         <button className="login">Submit</button>
-                    </div>
-                </form>
-            </div>
+                    </form>
+                </div>
             </div>
         </>
     );
 };
 
 export default Adminlogin;
-
-
-
