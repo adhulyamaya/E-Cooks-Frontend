@@ -168,7 +168,7 @@ const Ordersuccess = () => {
     if (confirmed) {
       setTimeout(() => {
         navigate('/');
-      }, 5000);
+      }, 3000);
     }
   }, [confirmed, navigate]);
 
@@ -177,19 +177,18 @@ const Ordersuccess = () => {
       <UserNav />
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '70vh' }}>
         <div className="App" style={{ textAlign: 'center' }}>
-       
-          <p style={{ color: 'green' }}><b>Payment successfully completed 🎉🎉🎉</b></p> 
+          <h1 style={{ color: 'green' }}><b>Payment successfully completed 🎉🎉🎉</b></h1> 
           <br />
           <br />
-          <h2>BOOK YOUR TIME</h2>
-          
           <Box component="section" sx={{ p: 4, border: '1px dashed grey', width: '500px' }}>
-          <h3>Order ID: {orderId}</h3>
+          <h2>BOOK YOUR TIME <h3>Order ID: {orderId}</h3></h2>          
             <form>
               <label>
                 Date:
                 <input type="date" value={selectedDate} onChange={handleDateChange} />
               </label>
+              <br />
+              <br />
               <br />
               <label>
                 Time:
@@ -204,8 +203,7 @@ const Ordersuccess = () => {
                 {loading ? 'Checking Availability...' : 'Book'}
               </button>
             </form>
-          </Box>
-          
+          </Box>          
           {confirmed ? (
             <p  style={{ color: 'green' }}>Your order has been booked 👍! We will notify the availability details...</p>
           ) : (
@@ -213,12 +211,10 @@ const Ordersuccess = () => {
           )}
         </div>
       </div>
-
       <div style={{ marginTop: 'auto' }}>
         <UserFooter />
       </div>
     </>
   );
 };
-
 export default Ordersuccess;

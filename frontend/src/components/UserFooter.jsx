@@ -8,7 +8,7 @@ const UserFooter = () => {
         <div className="grid grid-two-column">
           <div>
             <h3>Ready to get started?</h3>
-            <h3>Talk to us today</h3>
+            <h3>Talk to us today <li ><a href="/contact">Contact</a></li></h3>
           </div>
           <div>
           </div>
