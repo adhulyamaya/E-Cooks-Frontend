@@ -40,7 +40,7 @@ const UserFooter = () => {
               </div>
               <div>
                 <a
-                  href="https://www.youtube.com/channel/UCwfaAHy4zQUb2APNOGXUCCA"
+                  href=""
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -37,7 +37,9 @@ const Userlogin = () => {
           access: res.data.access,
           refresh: res.data.refresh
         };
-        localStorage.removeItem('adminDetails'); 
+        
+        console.log(Cookies.get("adminDetails",'mmmmmmmmmmm'));
+        Cookies.remove("adminDetails");
         Cookies.set("userDetails", JSON.stringify(res.data.userdata));
         Cookies.set("accessToken", JSON.stringify(res.data.access));
         if (res.data.message === "success")

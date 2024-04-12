@@ -5,7 +5,6 @@ import Cookies from 'js-cookie';
 import { isAuthenticated } from '../authUtils';
 import "./adminlogin.css"
 
-
 const Adminlogin = () => {
     const [adminUsername, setUsername] = useState("");
     const [adminPassword, setPassword] = useState("");
