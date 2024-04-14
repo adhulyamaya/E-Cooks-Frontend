@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./courses.css";
-import Heading from "../common/heading/Heading";
 import axiosInstance from "../../axios/axios";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setMentorId } from "../../feautures/mentorSlice/mentorSignupSlice";
+
 
 const CoursesCard = () => {
   const [classdata, setClassdata] = useState([]);
@@ -33,7 +32,6 @@ const CoursesCard = () => {
         <div className='container grid2'>
           {classdata.map((val) => (
             <div className='items' key={val.id}>
-              <div className='items'>
                 <div className='content flex'>
                   <div className='left'>
                     <div className='img'>
@@ -51,11 +49,11 @@ const CoursesCard = () => {
                       <label htmlFor=''>(5.0)</label>
                     </div>
                     <div className='details'>
-                      {/* Additional Details */}
+                     
                       <p>Price: {val.price}</p>
                       <p>Description: {val.course_description}</p>
                       <p>syllabus: {val.syllabus}</p>
-                      {/* You can add more details here */}
+                    
                     </div>
                   </div>
                 </div>
@@ -64,8 +62,6 @@ const CoursesCard = () => {
                     {val.price} $
                   </h3>
                 </div>
-
-                {/* Pass more details to the Link */}
                 <Link to={`/checkout/${val.id}`} state={{ courseInfo: { 
                   class_name: val.class_name, 
                   price: val.price,
@@ -77,7 +73,6 @@ const CoursesCard = () => {
                   <button className='outline-btn'>ENROLL NOW!</button>
                 </Link>
               </div>
-            </div>
           ))}
         </div>
       </section>

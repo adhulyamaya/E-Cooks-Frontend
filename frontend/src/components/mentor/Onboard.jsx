@@ -18,7 +18,9 @@ import axiosInstance from "../../axios/mentoraxios";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
+import { v4 as uuidv4 } from "uuid";
+import { storage } from '../../firebase/firebaseconfig';
 const Onboard = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -65,12 +67,20 @@ const Onboard = () => {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   };
+  
 
   const mentorSubmit = () => {
     if (!validateFields()) {
       // Fields are not valid, do not submit
       return;
     }
+  
+
+  const reference = ref(storage, `mentorimages/${mentoronboard.value.image.name + uuidv4()}`);
+    uploadBytes(reference, mentoronboard.value.image)
+      .then((snapshot) => {
+        getDownloadURL(reference).then((url) => {
+          console.log(url, 'Mentor Image URL');
 
     const datas = {
       mentor_id: mentorId,
@@ -80,7 +90,7 @@ const Onboard = () => {
       expertise: mentoronboard.value.expertise,
       experience: mentoronboard.value.experience,
       age: mentoronboard.value.age,
-      image: mentoronboard.value.image,
+      image:url,
       address: mentoronboard.value.address,
       certificate: mentoronboard.value.certificate,
       availability_start_time: mentoronboard.value.availability_start_time,
@@ -89,10 +99,11 @@ const Onboard = () => {
     axiosInstance.post("mentoronboard/", datas).then((res) => {
       if (res.data.message === "success") {
         navigate("../mentorlogin");
-      }
+        }
+      });
     });
-  };
-
+  });
+};
   return (
     <Box
       sx={{
@@ -223,7 +234,7 @@ const Onboard = () => {
           <TextField
             required
             id="certificate"
-            label="Certificate"
+            label="Certified in"
             variant="outlined"
             placeholder="Certificate"
             value={mentoronboard.value.certificate}

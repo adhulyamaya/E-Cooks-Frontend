@@ -1,8 +1,5 @@
-// MentorSidebar.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-
-
 
 const MentorSidebar = () => {
   const navigate = useNavigate();
@@ -23,7 +20,6 @@ const MentorSidebar = () => {
           Entrolled Students
         </div>
       </div>
-      
     </div>
   );
 };

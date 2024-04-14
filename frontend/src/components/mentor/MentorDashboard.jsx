@@ -23,10 +23,11 @@ const MentorDashboard = () => {
       <div style={{ flex: 1, padding: "20px", margin: 0 }}>
 
         <MentorHeader />
-       
+       <div>welcome</div>
       </div>
     </div>
   );
 };
 
 export default MentorDashboard;
+ 

@@ -7,8 +7,6 @@ import { v4 as uuidv4 } from "uuid";
 import { setClassname, setDescription, setPrice, setSyllabus } from '../../feautures/mentorSlice/addClassSlice';
 import { storage } from '../../firebase/firebaseconfig';
 
-
-
 const AddClass = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,6 +22,7 @@ const AddClass = () => {
   const handleThumbnail = (e) => {
     setImage(e.target.files[0]);
   };
+
 
   const createClassSubmit = () => {
     if (!image) {
@@ -80,8 +79,6 @@ const AddClass = () => {
 
             <label htmlFor='classname'>SYLLABUS:</label>
             <input type='text' name='syllabus' className='formcontrol' onChange={(e) => dispatch(setSyllabus(e.target.value))} />
-
-            {/* Input for course thumbnail */}
             <label htmlFor='thumbnail'>COURSE THUMBNAIL:</label>
             <input type='file' name='thumbnail' className='formcontrol' onChange={handleThumbnail} />
           </div>

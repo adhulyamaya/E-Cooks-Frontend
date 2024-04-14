@@ -40,6 +40,9 @@ import EntrolleStudentCourseList from "./components/admin/EntrolleStudentCourseL
 
 
 
+
+
+
 // using LazyLoader for codesplitting - intial loading faster ( lazy() + <Suspense> ) */}
 
 const Userlogin = lazy(() => import("./components/Userlogin"));
@@ -82,16 +85,21 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/courses" element={<CourseHome />} />
             <Route  path="/team" element={<Team />} />
-            <Route  path="/pricing" element={<Pricing />} />
             <Route  path="/contact" element={<Contact />} />
-            <Route path="/checkout/:courseId" element={<Chekout />} />
-            <Route path="/ordersuccess" element={<Ordersucess/>}/>
             <Route path="/mycourses" element={<MyCourses/>}/> 
-            <Route path="/usernav" element={<UserNav/>}/> 
+            <Route path="/usernav" element={<UserNav/>}/>
+             {/* <Route path="/checkout/:courseId" element={<Chekout />} />
+            <Route path="/ordersuccess" element={<Ordersucess/>}/> 
             <Route path="/chatroom" element={<Chat />}/> 
             <Route path="/videoplayer" element={<VideoPlayer/>}/>
             <Route path="/videoroom" element={<VideoRoom/>}/>
-            <Route path="/VideoClass" element={<VideoClass/>}/>
+            <Route path="/VideoClass" element={<VideoClass/>}/> */}
+            <Route path="/checkout/:courseId" element={<ProtectedRoute path="/checkout/:courseId" element={<Chekout />} />} />
+            <Route path="/ordersuccess" element={<ProtectedRoute path="/ordersuccess" element={<Ordersucess />} />} />
+            <Route path="/chatroom" element={<ProtectedRoute path="/chatroom" element={<Chat />} />} />
+            <Route path="/videoplayer" element={<ProtectedRoute path="/videoplayer" element={<VideoPlayer />} />} />
+            <Route path="/videoroom" element={<ProtectedRoute path="/videoroom" element={<VideoRoom />} />} />
+            <Route path="/VideoClass" element={<ProtectedRoute path="/VideoClass" element={<VideoClass />} />} />
            
 
             {/* admin routes */}            
@@ -126,7 +134,7 @@ function App() {
             <Route path="/classmanagement/deleteclass/:id" element={<DeleteClass />} />
             <Route path="/purchased courses" element={<PurchasedCourses />} />
             <Route path="/chatroommentor" element={<ChatRoomMentor />} />
-
+           
           </Routes>
         </Suspense>
       </div>
